@@ -25,18 +25,19 @@ class HomeViewModel(val app: Application) : AndroidViewModel(app) {
     val isLoading: LiveData<Boolean>
         get() = _isLoading
 
-    private val githubRepo = ModelRepository(app)
+    private val githubRepo = ModelRepository
 
+     var PAGE_NO:Int = 1
 
     fun refreshDataFromRepository() {
         viewModelScope.launch {
             _isLoading.value = true
-            when (val resultResponse = githubRepo.getClosedPullRequests()) {
+            when (val resultResponse = githubRepo.getClosedPullRequests(PAGE_NO)) {
                 is Resource.Success -> {
                     _isLoading.value = false
                     val list = resultResponse.output as List<PullRequestData>
                     if (list.size >= 0 && list.size == Constants.PER_PAGE) {
-                        Constants.PAGE_NO += 1
+                        PAGE_NO += 1
                         _listResponse.postValue(list)
                     } else {
                         _listResponse.postValue(list)

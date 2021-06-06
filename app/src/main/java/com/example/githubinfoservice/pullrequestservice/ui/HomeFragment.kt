@@ -72,12 +72,11 @@ class HomeFragment : Fragment() {
 
         viewModel.isLoading.observe(viewLifecycleOwner, {
             it?.let {
-
                 progress_circular.visibility = when (it) {
                     true -> View.VISIBLE
                     false -> View.GONE
                 }
-                Snackbar.make(recycler, Constants.PAGE_NO.toString(), Snackbar.LENGTH_LONG).show()
+                Snackbar.make(recycler, viewModel.PAGE_NO.toString(), Snackbar.LENGTH_LONG).show()
 
             }
         })
@@ -91,7 +90,6 @@ class HomeFragment : Fragment() {
                     .setAction("Refresh") {
                         viewModel.refreshDataFromRepository()
                     }.setActionTextColor(Color.YELLOW).show()
-                viewModel.refreshDataFromRepository()
             }
         })
     }
