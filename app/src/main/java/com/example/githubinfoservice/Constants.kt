@@ -6,5 +6,5 @@ object Constants {
     const val OWNER = "aasthajn"
     const val REPO_NAME = "NaviAssignment"
     const val SORT = "updated"
-    var PER_PAGE = 3
+    var PER_PAGE = 4
 }

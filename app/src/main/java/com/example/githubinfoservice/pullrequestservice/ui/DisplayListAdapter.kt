@@ -26,7 +26,6 @@ class DisplayListAdapter(private val onClickListener: DataClickListener) :
 
     override fun onBindViewHolder(holder: BaseHolder, position: Int) {
         holder.bind(dataList[position])
-        //holder.bind(dataList[position])
     }
 
     class DataClickListener(val clickListener: (url: String) -> Unit) {
