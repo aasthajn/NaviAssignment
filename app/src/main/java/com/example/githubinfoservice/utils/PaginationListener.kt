@@ -20,7 +20,7 @@ abstract class PaginationListener(private val layoutManager: LinearLayoutManager
         }
     }
 
-    protected abstract fun loadMoreItems()
-    protected abstract fun isLoading(): Boolean
-    protected abstract fun reachedEnd(): Boolean
+     abstract fun loadMoreItems()
+     abstract fun isLoading(): Boolean
+     abstract fun reachedEnd(): Boolean
 }
