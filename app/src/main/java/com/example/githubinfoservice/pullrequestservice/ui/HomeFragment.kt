@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.githubinfoservice.Constants
 import com.example.githubinfoservice.R
 import com.example.githubinfoservice.pullrequestservice.viewmodel.HomeViewModel
 import com.example.githubinfoservice.utils.ConnectionLiveData
@@ -17,26 +16,19 @@ import com.example.githubinfoservice.utils.PaginationListener
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.home_fragment.*
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(R.layout.home_fragment) {
 
     companion object {
         fun newInstance() = HomeFragment()
     }
 
     private val viewModel by viewModels<HomeViewModel>()
-    private lateinit var adapter:DisplayListAdapter
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.home_fragment, container, false)
-    }
+    private lateinit var adapter: DisplayListAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-         adapter = DisplayListAdapter(DisplayListAdapter.DataClickListener { url ->
+        adapter = DisplayListAdapter(DisplayListAdapter.DataClickListener { url ->
             Toast.makeText(context, "url${url}", Toast.LENGTH_SHORT).show()
         })
 
@@ -59,39 +51,46 @@ class HomeFragment : Fragment() {
         recycler.addOnScrollListener(paginationListener)
 
         subscribe()
-
-        viewModel.refreshDataFromRepository()
     }
 
-    fun subscribe() {
+    private fun subscribe() {
+
         viewModel.listResponse.observe(viewLifecycleOwner, {
             it?.let {
                 adapter.list = (it).toMutableList()
-            }
+            } ?: run { adapter.clearList() }
+            // Snackbar.make(recycler, viewModel.PAGE_NO.toString(), Snackbar.LENGTH_LONG).show()
         })
 
         viewModel.isLoading.observe(viewLifecycleOwner, {
             it?.let {
-                progress_circular.visibility = when (it) {
+                progress_bottom.visibility = when (it) {
                     true -> View.VISIBLE
                     false -> View.GONE
                 }
-                Snackbar.make(recycler, viewModel.PAGE_NO.toString(), Snackbar.LENGTH_LONG).show()
-
+                setRecyclePaddingBottom(it)
             }
         })
 
-        ConnectionLiveData(requireContext()).observe(viewLifecycleOwner, {
-                status->
-            if(!status) {
+        ConnectionLiveData(requireContext()).observe(viewLifecycleOwner, { status ->
+            if (!status) {
                 Snackbar.make(recycler, "You are Offline", Snackbar.LENGTH_LONG).show()
-            }else{
+            } else {
                 Snackbar.make(recycler, "You are Online", Snackbar.LENGTH_LONG)
                     .setAction("Refresh") {
+                        viewModel.resetList()
                         viewModel.refreshDataFromRepository()
                     }.setActionTextColor(Color.YELLOW).show()
+                viewModel.refreshDataFromRepository()
             }
         })
+    }
+
+    private fun setRecyclePaddingBottom(isLoading: Boolean) {
+        if (isLoading)
+            recycler.setPadding(0, 0, 0, 160)
+        else
+            recycler.setPadding(0, 0, 0, 0)
     }
 
 }
