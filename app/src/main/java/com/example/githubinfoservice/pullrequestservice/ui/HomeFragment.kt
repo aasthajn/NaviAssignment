@@ -38,11 +38,11 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
             }
 
             override fun isLoading(): Boolean {
-                return viewModel._isLoading.value ?: false
+                return viewModel.getLoading()
             }
 
             override fun reachedEnd(): Boolean {
-                return viewModel._isReachedEnd.value ?: false
+                return viewModel.getReachedEnd()
             }
         }
 

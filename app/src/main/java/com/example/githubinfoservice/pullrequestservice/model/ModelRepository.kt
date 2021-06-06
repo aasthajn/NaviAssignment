@@ -20,7 +20,7 @@ object ModelRepository: BaseRepository() {
         return enqueue(
             call = {
                 withContext(Dispatchers.IO) {
-                    client.getPullRequestsMock(OWNER, REPO_NAME, STATE, PER_PAGE, page_No, SORT)
+                    client.getPullRequests(OWNER, REPO_NAME, STATE, PER_PAGE, page_No, SORT)
                 }
             }
         )

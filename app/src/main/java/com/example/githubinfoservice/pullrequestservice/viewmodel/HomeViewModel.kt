@@ -17,11 +17,11 @@ class HomeViewModel(val app: Application) : AndroidViewModel(app) {
 
     private val _errorLiveData = MutableLiveData<ErrorResponse>()
 
-    val _isReachedEnd: MutableLiveData<Boolean> = MutableLiveData()
+    private val _isReachedEnd: MutableLiveData<Boolean> = MutableLiveData()
     val isReachedEnd: LiveData<Boolean>
         get() = _isReachedEnd
 
-    val _isLoading: MutableLiveData<Boolean> = MutableLiveData()
+    private val _isLoading: MutableLiveData<Boolean> = MutableLiveData()
     val isLoading: LiveData<Boolean>
         get() = _isLoading
 
@@ -58,4 +58,21 @@ class HomeViewModel(val app: Application) : AndroidViewModel(app) {
         _listResponse.value = null
         _isReachedEnd.value = false
     }
+
+    fun resetLoading(){
+        _isLoading.value = false
+    }
+
+    fun resetReachedEnd() {
+        _isReachedEnd.value = false
+    }
+
+    fun getLoading():Boolean{
+       return _isLoading.value?:false
+    }
+
+    fun getReachedEnd():Boolean{
+        return _isReachedEnd.value?:false
+    }
+
 }
