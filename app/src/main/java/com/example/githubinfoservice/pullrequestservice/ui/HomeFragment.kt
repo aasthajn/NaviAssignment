@@ -9,13 +9,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.githubinfoservice.Constants
 import com.example.githubinfoservice.R
 import com.example.githubinfoservice.pullrequestservice.viewmodel.HomeViewModel
 import com.example.githubinfoservice.utils.ConnectionLiveData
 import com.example.githubinfoservice.utils.PaginationListener
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.home_fragment.*
-import java.util.Observer
 
 class HomeFragment : Fragment() {
 
@@ -77,6 +77,8 @@ class HomeFragment : Fragment() {
                     true -> View.VISIBLE
                     false -> View.GONE
                 }
+                Snackbar.make(recycler, Constants.PAGE_NO.toString(), Snackbar.LENGTH_LONG).show()
+
             }
         })
 

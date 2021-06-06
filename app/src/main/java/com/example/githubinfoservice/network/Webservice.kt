@@ -2,7 +2,6 @@ package com.example.githubinfoservice.network
 
 import com.example.githubinfoservice.Constants.BASE_URL
 import com.example.githubinfoservice.pullrequestservice.model.datamodels.PullRequestData
-import com.example.githubinfoservice.pullrequestservice.model.datamodels.RepoResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -15,6 +14,6 @@ interface Webservice {
         @Path("repo_name") repo_name: String,
         @Query("state") state: String,
         @Query("per_page") pageSize: Int,
-        @Query("page_no") pageNo: Int
+        @Query("page") pageNo: Int
     ): List<PullRequestData>
 }
