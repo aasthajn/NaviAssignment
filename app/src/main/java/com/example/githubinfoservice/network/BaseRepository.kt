@@ -7,7 +7,7 @@ import com.google.gson.reflect.TypeToken
 import retrofit2.HttpException
 import retrofit2.Response
 
-open class BaseRepository(val application: Application) {
+open class BaseRepository() {
 
     suspend fun <T : Any> enqueue(call: suspend () -> T): Resource<T> {
         return apiOutput(call)
