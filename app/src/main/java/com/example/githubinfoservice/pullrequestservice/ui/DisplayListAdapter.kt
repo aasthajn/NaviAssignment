@@ -4,7 +4,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githubinfoservice.pullrequestservice.model.datamodels.PullRequestData
 
-class DisplayListAdapter(private val onClickListener: DataClickListener) : RecyclerView.Adapter<BaseHolder>() {
+class DisplayListAdapter(private val onClickListener: DataClickListener) :
+    RecyclerView.Adapter<BaseHolder>() {
 
     private var dataList: ArrayList<PullRequestData> = arrayListOf()
     var list: MutableList<PullRequestData>

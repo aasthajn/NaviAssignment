@@ -9,7 +9,7 @@ import retrofit2.Response
 
 open class BaseRepository(val application: Application) {
 
-    suspend fun <T : Any> enqueue(call: suspend () ->T): Resource<T> {
+    suspend fun <T : Any> enqueue(call: suspend () -> T): Resource<T> {
         return apiOutput(call)
     }
 
@@ -24,17 +24,27 @@ open class BaseRepository(val application: Application) {
                     try {
                         val response = throwable.response()
                         val type = object : TypeToken<ErrorResponse>() {}.type
-                        val errorResponse: ErrorResponse = Gson().fromJson(response?.errorBody()?.charStream(), type)
+                        val errorResponse: ErrorResponse =
+                            Gson().fromJson(response?.errorBody()?.charStream(), type)
                         Resource.Error(errorResponse)
                     } catch (e: JsonSyntaxException) {
-                        Resource.Error(ErrorResponse(throwable.response()?.message(),throwable.code().toString()))
+                        Resource.Error(
+                            ErrorResponse(
+                                throwable.response()?.message(),
+                                throwable.code().toString()
+                            )
+                        )
                     } catch (e: Throwable) {
-                        Resource.Error(ErrorResponse(throwable.response()?.message(),throwable.code().toString()))
+                        Resource.Error(
+                            ErrorResponse(
+                                throwable.response()?.message(),
+                                throwable.code().toString()
+                            )
+                        )
                     }
                 }
                 else -> {
-                    // val errorMessage = RiderApp.getInstance().getString(R.string.something_went_wrong)
-                    Resource.Error(ErrorResponse(throwable.message,""))
+                    Resource.Error(ErrorResponse(throwable.message, ""))
                 }
             }
         }

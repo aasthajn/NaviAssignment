@@ -15,6 +15,6 @@ interface Webservice {
         @Path("repo_name") repo_name: String,
         @Query("state") state: String,
         @Query("per_page") pageSize: Int,
-        @Query("page_no") pageNo:Int
-    ):List<PullRequestData>
+        @Query("page_no") pageNo: Int
+    ): List<PullRequestData>
 }

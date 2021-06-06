@@ -1,7 +1,6 @@
 package com.example.githubinfoservice.pullrequestservice.model
 
 import android.app.Application
-import com.example.githubinfoservice.Constants
 import com.example.githubinfoservice.Constants.OWNER
 import com.example.githubinfoservice.Constants.PAGE_NO
 import com.example.githubinfoservice.Constants.PER_PAGE
