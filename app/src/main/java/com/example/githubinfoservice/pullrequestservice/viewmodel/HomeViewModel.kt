@@ -27,7 +27,7 @@ class HomeViewModel(val app: Application) : AndroidViewModel(app) {
 
     private val githubRepo = ModelRepository
 
-     var PAGE_NO:Int = 1
+    var PAGE_NO: Int = 1
 
     fun refreshDataFromRepository() {
         viewModelScope.launch {
@@ -36,7 +36,7 @@ class HomeViewModel(val app: Application) : AndroidViewModel(app) {
                 is Resource.Success -> {
                     _isLoading.value = false
                     val list = resultResponse.output as List<PullRequestData>
-                    if (list.size >= 0 && list.size == Constants.PER_PAGE) {
+                    if (list.size >= 0 && list.size >= Constants.PER_PAGE) {
                         PAGE_NO += 1
                         _listResponse.postValue(list)
                     } else {
@@ -51,5 +51,11 @@ class HomeViewModel(val app: Application) : AndroidViewModel(app) {
             }
 
         }
+    }
+
+    fun resetList() {
+        PAGE_NO = 1
+        _listResponse.value = null
+        _isReachedEnd.value = false
     }
 }

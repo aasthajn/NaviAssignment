@@ -18,6 +18,8 @@ class DisplayViewHolder(parent: ViewGroup, var listener: DisplayListAdapter.Data
                 tv_body.text = it
             }
             tv_closed_date.text = data.created_at
+
+            tv_merged_sha.text = data.merge_commit_sha.substring(0,7)
             image_avatar.loadImage(data.user.avatar_url)
             tv_title.setOnClickListener {
                 listener.onClick(data)

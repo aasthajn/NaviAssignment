@@ -1,11 +1,9 @@
 package com.example.githubinfoservice.network
 
-import android.app.Application
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
 import com.google.gson.reflect.TypeToken
 import retrofit2.HttpException
-import retrofit2.Response
 
 open class BaseRepository() {
 

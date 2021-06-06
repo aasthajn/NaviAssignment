@@ -9,6 +9,7 @@ data class PullRequestData(
     val body: String?,
     val created_at: String,
     val updated_at: String,
+    val merge_commit_sha: String,
     val user: User,
     val head: Head,
     val base: Base

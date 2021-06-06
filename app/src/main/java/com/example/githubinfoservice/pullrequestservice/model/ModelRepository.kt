@@ -1,6 +1,5 @@
 package com.example.githubinfoservice.pullrequestservice.model
 
-import android.app.Application
 import com.example.githubinfoservice.Constants.OWNER
 import com.example.githubinfoservice.Constants.PER_PAGE
 import com.example.githubinfoservice.Constants.REPO_NAME
@@ -21,7 +20,7 @@ object ModelRepository: BaseRepository() {
         return enqueue(
             call = {
                 withContext(Dispatchers.IO) {
-                    client.getPullRequests(OWNER, REPO_NAME, STATE, PER_PAGE, page_No, SORT)
+                    client.getPullRequestsMock(OWNER, REPO_NAME, STATE, PER_PAGE, page_No, SORT)
                 }
             }
         )

@@ -1,5 +1,6 @@
 package com.example.githubinfoservice.utils
 
+import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githubinfoservice.Constants.PER_PAGE
@@ -17,6 +18,7 @@ abstract class PaginationListener : RecyclerView.OnScrollListener() {
             && firstVisibleItemPosition >= 0
             && totalItemCount >= PER_PAGE && !isLoading() && !reachedEnd()
         ) {
+       //     Log.d("Log",reachedEnd().toString())
             loadMoreItems()
         }
     }
