@@ -38,7 +38,7 @@ class HomeFragment : Fragment() {
 
         val layoutManager = LinearLayoutManager(context)
 
-        val paginationListener = object : PaginationListener(layoutManager) {
+        val paginationListener = object : PaginationListener (){
             override fun loadMoreItems() {
                 viewModel.refreshDataFromRepository()
             }
