@@ -19,13 +19,4 @@ interface Webservice {
         @Query("sort") created_at:String
     ): List<PullRequestData>
 
-    @GET("$MOCK_URL{owner}/{repo_name}/pulls")
-    suspend fun getPullRequestsMock(
-        @Path("owner") owner: String,
-        @Path("repo_name") repo_name: String,
-        @Query("state") state: String,
-        @Query("per_page") pageSize: Int,
-        @Query("page") pageNo: Int,
-        @Query("sort") created_at:String
-    ): List<PullRequestData>
 }

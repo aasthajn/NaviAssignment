@@ -1,6 +1,5 @@
 package com.example.githubinfoservice.utils
 
-import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githubinfoservice.Constants.PER_PAGE

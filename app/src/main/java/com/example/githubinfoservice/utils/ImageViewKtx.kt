@@ -6,7 +6,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.example.githubinfoservice.R
 
-fun ImageView.loadImage(url : String) {
+fun ImageView.loadImage(url: String) {
 
     val options = RequestOptions()
         .error(R.drawable.ic_cloud_off_black_24dp)

@@ -17,7 +17,8 @@ class DisplayListAdapter(private val onClickListener: DataClickListener) :
             } else {
                 dataList.addAll(value)
                 notifyItemRangeInserted(dataList.size, value.size)
-            } }
+            }
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseHolder {
         return DisplayViewHolder(parent, onClickListener)
@@ -27,10 +28,6 @@ class DisplayListAdapter(private val onClickListener: DataClickListener) :
 
     override fun onBindViewHolder(holder: BaseHolder, position: Int) {
         holder.bind(dataList[position])
-    }
-
-    fun clearList() {
-        list.clear()
     }
 
     class DataClickListener(val clickListener: (url: String) -> Unit) {

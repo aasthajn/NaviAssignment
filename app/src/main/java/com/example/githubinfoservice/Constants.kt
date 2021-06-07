@@ -7,7 +7,7 @@ object Constants {
     const val STATE = "closed"
     const val OWNER = "aasthajn"
     const val REPO_NAME = "NaviAssignment"
-    const val SORT = "updated"
+    const val SORT = "created"
     var PER_PAGE = 6
 
 }
