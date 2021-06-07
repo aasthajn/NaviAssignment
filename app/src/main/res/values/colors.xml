@@ -12,4 +12,7 @@
         <color name="primaryLightColor">#8e99f3</color>
         <color name="primaryDarkColor">#26418f</color>
         <color name="primaryTextColor">#ffffff</color>
+        <color name="primaryBackground">#d1d9ff</color>
+        <color name="primaryTextDark">#001064</color>
+    <color name="greenDark">#4caf50</color>
 </resources>
