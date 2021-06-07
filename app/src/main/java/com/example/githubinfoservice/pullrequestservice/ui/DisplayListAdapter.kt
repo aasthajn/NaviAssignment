@@ -11,7 +11,6 @@ class DisplayListAdapter(private val onClickListener: DataClickListener) :
     var list: MutableList<PullRequestData>
         get() = dataList
         set(value) {
-
             if (dataList.size == 0) {
                 dataList.addAll(value)
                 notifyDataSetChanged()

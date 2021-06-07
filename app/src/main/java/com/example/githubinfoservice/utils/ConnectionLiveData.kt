@@ -10,7 +10,6 @@ class ConnectionLiveData(context: Context) : LiveData<Boolean>() {
 
     private var connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
-     @SuppressLint("MissingPermission")
      fun isConnected():Boolean{
         val activeNetwork = connectivityManager.activeNetworkInfo
         return activeNetwork !=null && activeNetwork.isConnected
@@ -34,7 +33,7 @@ class ConnectionLiveData(context: Context) : LiveData<Boolean>() {
             postValue(false)
         }
     }
-    @SuppressLint("MissingPermission")
+
     private fun registerBroadCastReceiver() {
             val builder = NetworkRequest.Builder()
             connectivityManager.registerNetworkCallback(builder.build(), networkCallback)

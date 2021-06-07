@@ -25,15 +25,21 @@ class HomeViewModel(val app: Application) : AndroidViewModel(app) {
     val isLoading: LiveData<Boolean>
         get() = _isLoading
 
+    private val _isScrolledDown: MutableLiveData<Boolean> = MutableLiveData()
+    val isScrolledDown: LiveData<Boolean>
+        get() = _isScrolledDown
+
     private val githubRepo = ModelRepository
 
     var PAGE_NO: Int = 1
 
     fun refreshDataFromRepository() {
+        if(isScrolledDown()|| listResponse.value ==null){
         viewModelScope.launch {
             _isLoading.value = true
             when (val resultResponse = githubRepo.getClosedPullRequests(PAGE_NO)) {
                 is Resource.Success -> {
+                    _isScrolledDown.value = false
                     _isLoading.value = false
                     val list = resultResponse.output as List<PullRequestData>
                     if (list.size >= 0 && list.size >= Constants.PER_PAGE) {
@@ -50,7 +56,7 @@ class HomeViewModel(val app: Application) : AndroidViewModel(app) {
                 }
             }
 
-        }
+        }}
     }
 
     fun resetList() {
@@ -67,6 +73,10 @@ class HomeViewModel(val app: Application) : AndroidViewModel(app) {
         _isReachedEnd.value = false
     }
 
+    fun setScrolledDown(){
+        _isScrolledDown.value = true
+    }
+
     fun getLoading():Boolean{
        return _isLoading.value?:false
     }
@@ -75,4 +85,7 @@ class HomeViewModel(val app: Application) : AndroidViewModel(app) {
         return _isReachedEnd.value?:false
     }
 
+    fun isScrolledDown():Boolean {
+        return  _isScrolledDown.value?:false
+    }
 }

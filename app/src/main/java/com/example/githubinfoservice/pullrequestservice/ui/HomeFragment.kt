@@ -34,6 +34,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
 
         val paginationListener = object : PaginationListener() {
             override fun loadMoreItems() {
+                viewModel.setScrolledDown()
                 viewModel.refreshDataFromRepository()
             }
 
@@ -59,7 +60,6 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
             it?.let {
                 adapter.list = (it).toMutableList()
             } ?: run { adapter.clearList() }
-            // Snackbar.make(recycler, viewModel.PAGE_NO.toString(), Snackbar.LENGTH_LONG).show()
         })
 
         viewModel.isLoading.observe(viewLifecycleOwner, {
@@ -81,7 +81,8 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
                         viewModel.resetList()
                         viewModel.refreshDataFromRepository()
                     }.setActionTextColor(Color.YELLOW).show()
-                viewModel.refreshDataFromRepository()
+
+                    viewModel.refreshDataFromRepository()
             }
         })
     }
