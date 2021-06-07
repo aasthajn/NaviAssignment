@@ -18,6 +18,7 @@ object ModelRepository: BaseRepository() {
             call = {
                 withContext(Dispatchers.IO) {
                     client.getPullRequests(OWNER, REPO_NAME, STATE, PER_PAGE, page_No, SORT)
+                    //client.getPullRequestsMock(OWNER, REPO_NAME, STATE, PER_PAGE, page_No, SORT)
                 }
             }
         )

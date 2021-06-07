@@ -9,7 +9,7 @@ import com.example.githubinfoservice.R
 fun ImageView.loadImage(url : String) {
 
     val options = RequestOptions()
-
+        .error(R.drawable.ic_cloud_off_black_24dp)
     Glide.with(this.context)
         .setDefaultRequestOptions(options)
         .load(url)
