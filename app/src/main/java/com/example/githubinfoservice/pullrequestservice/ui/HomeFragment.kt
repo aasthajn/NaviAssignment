@@ -79,16 +79,6 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
             }
         })
 
-        viewModel.isReachedEnd.observe(viewLifecycleOwner,{
-            it?.let {
-                if (it) {
-                    Snackbar.make(recycler, resources.getString(R.string.no_more_data), Snackbar.LENGTH_LONG)
-                        .show()
-                    viewModel.resetReachedEnd()
-                }
-            }
-        })
-
         ConnectionLiveData(requireContext()).observe(viewLifecycleOwner, { status ->
             viewModel.setNetworkAvailable(status)
             if (!status) {
