@@ -3,6 +3,7 @@ package com.example.githubinfoservice.pullrequestservice.ui
 import android.view.ViewGroup
 import com.example.githubinfoservice.R
 import com.example.githubinfoservice.pullrequestservice.model.datamodels.PullRequestData
+import com.example.githubinfoservice.utils.AppUtils
 import com.example.githubinfoservice.utils.loadImage
 import kotlinx.android.synthetic.main.item_display.view.*
 
@@ -17,8 +18,7 @@ class DisplayViewHolder(parent: ViewGroup, var listener: DisplayListAdapter.Data
             data.body.let {
                 tv_body.text = it
             }
-            tv_closed_date.text = data.created_at
-
+            tv_closed_date.text = "merged on ${AppUtils.dateFormatted(data.created_at,"dd-MM-yy HH:mm")}"
             tv_merged_sha.text = data.merge_commit_sha.substring(0,7)
             image_avatar.loadImage(data.user.avatar_url)
             tv_title.setOnClickListener {
