@@ -68,13 +68,23 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         viewModel.isLoading.observe(viewLifecycleOwner, {
             it?.let {
                 if (it) {
-                    showLoader()
+                    handleBottomViewonDataLoad()
                 } else {
                     lifecycleScope.launch {
-                        delay(2000)
+                        handleBottomViewonDataFetched()
+                        delay(1500)
                         hideLoader()
                     }
+                }
+            }
+        })
 
+        viewModel.isReachedEnd.observe(viewLifecycleOwner,{
+            it?.let {
+                if (it) {
+                    Snackbar.make(recycler, resources.getString(R.string.no_more_data), Snackbar.LENGTH_LONG)
+                        .show()
+                    viewModel.resetReachedEnd()
                 }
             }
         })
@@ -90,17 +100,20 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         })
     }
 
-    private fun hideLoader() {
-        progress_bottom.visibility = View.GONE
+    private fun handleBottomViewonDataFetched() {
         tv_message.text = resources.getString(R.string.fetched_data)
-        bottom_view.animate().alpha(0.0f)
+        progress_bottom.visibility = View.GONE
     }
 
-    private fun showLoader() {
-        progress_bottom.visibility = View.VISIBLE
+    private fun handleBottomViewonDataLoad() {
         bottom_view.visibility = View.VISIBLE
-        bottom_view.animate().alpha(1.0f)
+        progress_bottom.visibility = View.VISIBLE
         tv_message.text = resources.getString(R.string.loading)
+        bottom_view.animate().alpha(1.0f)
+    }
+
+    private fun hideLoader() {
+        bottom_view.animate().alpha(0.0f)
     }
 
 }
