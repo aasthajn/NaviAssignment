@@ -79,6 +79,13 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
             }
         })
 
+        viewModel.errorLiveData.observe(viewLifecycleOwner, { message ->
+            message.let {
+                Toast.makeText(context,it,Toast.LENGTH_SHORT).show()
+                viewModel.resetErrorLiveData()
+            }
+        })
+
         ConnectionLiveData(requireContext()).observe(viewLifecycleOwner, { status ->
             viewModel.setNetworkAvailable(status)
             if (!status) {
