@@ -15,6 +15,8 @@ class HomeViewModel(val app: Application) : AndroidViewModel(app) {
         get() = _listResponse
 
     private val _isReachedEnd: MutableLiveData<Boolean> = MutableLiveData()
+    val isReachedEnd: LiveData<Boolean>
+        get() = _isReachedEnd
 
     private val _isLoading: MutableLiveData<Boolean> = MutableLiveData()
     val isLoading: LiveData<Boolean>
@@ -72,5 +74,9 @@ class HomeViewModel(val app: Application) : AndroidViewModel(app) {
 
     private fun isScrolledDown(): Boolean {
         return _isScrolledDown.value ?: false
+    }
+
+    fun resetReachedEnd() {
+        _isReachedEnd.value = false
     }
 }
