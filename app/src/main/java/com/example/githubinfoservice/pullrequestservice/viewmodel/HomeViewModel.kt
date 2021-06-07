@@ -14,9 +14,9 @@ class HomeViewModel(val app: Application) : AndroidViewModel(app) {
     private val _listResponse: MutableLiveData<List<PullRequestData>> = MutableLiveData()
     val listResponse: LiveData<List<PullRequestData>>
         get() = _listResponse
-
     private val _errorLiveData = MutableLiveData<ErrorResponse>()
-
+    val errorLiveData: LiveData<ErrorResponse>
+        get() = _errorLiveData
     private val _isReachedEnd: MutableLiveData<Boolean> = MutableLiveData()
     val isReachedEnd: LiveData<Boolean>
         get() = _isReachedEnd

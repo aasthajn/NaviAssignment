@@ -29,10 +29,6 @@ class DisplayListAdapter(private val onClickListener: DataClickListener) :
         holder.bind(dataList[position])
     }
 
-    fun clearList() {
-        list.clear()
-    }
-
     class DataClickListener(val clickListener: (url: String) -> Unit) {
         fun onClick(pullRequestData: PullRequestData) = clickListener(pullRequestData.url)
     }

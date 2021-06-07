@@ -1,8 +1,9 @@
 package com.example.githubinfoservice.utils
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.net.*
+import android.net.ConnectivityManager
+import android.net.Network
+import android.net.NetworkRequest
 import androidx.lifecycle.LiveData
 
 
