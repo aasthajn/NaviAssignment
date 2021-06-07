@@ -4,6 +4,7 @@
     <string name="online">You are online</string>
     <string name="refresh">Refresh</string>
     <string name="empty_body_hint">"~ empty body "</string>
-    <string name="loading">Loading...</string>
+    <string name="loading">Loading…</string>
     <string name="fetched_data">Fetched Data</string>
+    <string name="merge_date">merged on %s</string>
 </resources>

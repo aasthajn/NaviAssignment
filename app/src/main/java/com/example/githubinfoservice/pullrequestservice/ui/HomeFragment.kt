@@ -29,7 +29,7 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         super.onViewCreated(view, savedInstanceState)
 
         adapter = DisplayListAdapter(DisplayListAdapter.DataClickListener { url ->
-            Toast.makeText(context, "$url", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "URL : $url", Toast.LENGTH_SHORT).show()
         })
 
         val paginationListener = object : PaginationListener() {
@@ -59,7 +59,6 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
     }
 
     private fun subscribe() {
-
         viewModel.listResponse.observe(viewLifecycleOwner, { list ->
             list?.let { it ->
                 adapter.list = (it).toMutableList()
@@ -69,12 +68,10 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         viewModel.isLoading.observe(viewLifecycleOwner, {
             it?.let {
                 if (it) {
-                    lifecycleScope.launch {
-                        showLoader()
-                    }
+                    showLoader()
                 } else {
                     lifecycleScope.launch {
-                        delay(500)
+                        delay(2000)
                         hideLoader()
                     }
 
@@ -84,13 +81,10 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
 
         ConnectionLiveData(requireContext()).observe(viewLifecycleOwner, { status ->
             viewModel.setNetworkAvailable(status)
-
             if (!status) {
                 Snackbar.make(recycler, resources.getString(R.string.offline), Snackbar.LENGTH_LONG)
                     .show()
             } else {
-                Snackbar.make(recycler, resources.getString(R.string.online), Snackbar.LENGTH_SHORT)
-                    .show()
                 refreshData()
             }
         })

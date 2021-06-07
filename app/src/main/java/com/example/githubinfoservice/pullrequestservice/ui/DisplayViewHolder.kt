@@ -18,8 +18,12 @@ class DisplayViewHolder(parent: ViewGroup, var listener: DisplayListAdapter.Data
             data.body.let {
                 tv_body.text = it
             }
-            tv_closed_date.text = "merged on ${AppUtils.dateFormatted(data.created_at,"dd-MM-yy HH:mm")}"
-            tv_merged_sha.text = data.merge_commit_sha.substring(0,7)
+            tv_closed_date.text = String.format(
+                itemView.context.getString(R.string.merge_date),
+                "${AppUtils.dateFormatted(data.created_at, "dd-MM-yy HH:mm")}"
+            )
+
+            tv_merged_sha.text = data.merge_commit_sha.substring(0, 7)
             image_avatar.loadImage(data.user.avatar_url)
             tv_title.setOnClickListener {
                 listener.onClick(data)

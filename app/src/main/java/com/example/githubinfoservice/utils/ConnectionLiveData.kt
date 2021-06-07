@@ -9,11 +9,12 @@ import androidx.lifecycle.LiveData
 
 class ConnectionLiveData(context: Context) : LiveData<Boolean>() {
 
-    private var connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    private var connectivityManager =
+        context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
-     fun isConnected():Boolean{
+    private fun isConnected(): Boolean {
         val activeNetwork = connectivityManager.activeNetworkInfo
-        return activeNetwork !=null && activeNetwork.isConnected
+        return activeNetwork != null && activeNetwork.isConnected
     }
 
     override fun onActive() {
@@ -36,9 +37,8 @@ class ConnectionLiveData(context: Context) : LiveData<Boolean>() {
     }
 
     private fun registerBroadCastReceiver() {
-            val builder = NetworkRequest.Builder()
-            connectivityManager.registerNetworkCallback(builder.build(), networkCallback)
-
+        val builder = NetworkRequest.Builder()
+        connectivityManager.registerNetworkCallback(builder.build(), networkCallback)
     }
 
     private fun unRegisterBroadCastReceiver() {

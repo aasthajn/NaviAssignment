@@ -17,7 +17,8 @@ class DisplayListAdapter(private val onClickListener: DataClickListener) :
             } else {
                 dataList.addAll(value)
                 notifyItemRangeInserted(dataList.size, value.size)
-            } }
+            }
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseHolder {
         return DisplayViewHolder(parent, onClickListener)
